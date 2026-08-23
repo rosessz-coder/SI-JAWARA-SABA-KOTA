@@ -1068,7 +1068,7 @@ form.addEventListener("submit", async function(event) {
 
   const { data, error } = await supabaseClient
     .from("peserta")
-    .insert([
+    .insert([dataPeserta]);
       {
         nama: nama,
         whatsapp: whatsapp,
