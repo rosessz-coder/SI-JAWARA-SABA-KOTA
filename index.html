@@ -1,0 +1,1044 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SI JAWARA SABA KOTA | Ticketing</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7fb;
+      color: #202020;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      background: linear-gradient(135deg, #e08a11, #dd8c0b);
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      margin-top: 3px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      opacity: 0.8;
+    }
+
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 500px;
+      background:
+        linear-gradient(
+          rgba(188, 104, 52, 0.78),
+          rgba(246, 156, 12, 0.72)
+        ),
+        url("https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1600&q=80")
+        center/cover;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 60px 20px;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .hero-label {
+      display: inline-block;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.35);
+      padding: 9px 18px;
+      border-radius: 50px;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.05;
+      margin-bottom: 20px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .hero h1 span {
+      color: #ffd43b;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 650px;
+      margin: auto;
+      color: #f9eeee;
+    }
+
+    .event-info {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 35px;
+    }
+
+    .info-box {
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 13px 20px;
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+    }
+
+
+    /* ================= SECTION ================= */
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 34px;
+      color: #e59b07;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: #777;
+    }
+
+
+    /* ================= TICKET CARD ================= */
+
+    .ticket-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .ticket-info {
+      background: white;
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+    }
+
+    .ticket-info h3 {
+      color: #ea9c3d;
+      margin-bottom: 20px;
+      font-size: 23px;
+    }
+
+    .ticket-info ul {
+      list-style: none;
+    }
+
+    .ticket-info li {
+      padding: 13px 0;
+      border-bottom: 1px solid #eee;
+      color: #555;
+    }
+
+    .ticket-info li:last-child {
+      border-bottom: none;
+    }
+
+    .ticket-info strong {
+      color: #222;
+    }
+
+
+    /* ================= FORM ================= */
+
+    .form-card {
+      background: white;
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+    }
+
+    .form-card h3 {
+      color: #e68c2c;
+      margin-bottom: 25px;
+      font-size: 23px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      outline: none;
+      font-size: 14px;
+      transition: 0.2s;
+      background: white;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #f1920e;
+      box-shadow: 0 0 0 3px rgba(215,25,32,0.08);
+    }
+
+
+    /* ================= CATEGORY ================= */
+
+    .category-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .category-option {
+      position: relative;
+    }
+
+    .category-option input {
+      display: none;
+    }
+
+    .category-option label {
+      display: block;
+      text-align: center;
+      padding: 16px 10px;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+      background: #fff;
+    }
+
+    .category-option input:checked + label {
+      border-color: #e0982d;
+      background: #fff0f0;
+      color: #e5a23c;
+      font-weight: 800;
+    }
+
+
+    /* ================= DATE ================= */
+
+    .date-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .date-option input {
+      display: none;
+    }
+
+    .date-option label {
+      display: block;
+      text-align: center;
+      padding: 15px 10px;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .date-option input:checked + label {
+      border-color: #e7a31b;
+      background: #fff0f0;
+      color: #df8f3e;
+      font-weight: 800;
+    }
+
+
+    /* ================= BUTTON ================= */
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      padding: 16px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #de7e1f, #ef8e33);
+      color: white;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: 0.25s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(139,0,0,0.25);
+    }
+
+
+    /* ================= SUCCESS ================= */
+
+    .success {
+      display: none;
+      background: #fff;
+      border-radius: 20px;
+      padding: 35px;
+      margin-top: 30px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .success.show {
+      display: block;
+    }
+
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #e7f8ef;
+      color: #159447;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      font-size: 34px;
+    }
+
+    .success h2 {
+      color: #ef8f35;
+      margin-bottom: 8px;
+    }
+
+
+    /* ================= E-TICKET ================= */
+
+    .e-ticket {
+      margin-top: 25px;
+      text-align: left;
+      border: 2px dashed #e08121;
+      border-radius: 15px;
+      padding: 25px;
+      background: #fffafa;
+    }
+
+    .ticket-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+
+    .ticket-brand {
+      color: #e98a2c;
+      font-weight: 900;
+    }
+
+    .ticket-number {
+      color: #df8e43;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .ticket-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .detail-box span {
+      display: block;
+      font-size: 11px;
+      color: #888;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .detail-box strong {
+      font-size: 14px;
+    }
+
+
+    /* ================= ABOUT ================= */
+
+    .about {
+      background: #e59e2d;
+      color: white;
+      text-align: center;
+    }
+
+    .about h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .about p {
+      max-width: 700px;
+      margin: auto;
+      color: #f5dede;
+      line-height: 1.8;
+    }
+
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      background: #facc61;
+      color: white;
+      padding: 35px 0;
+      text-align: center;
+    }
+
+    footer p {
+      color: #aaa;
+      font-size: 13px;
+    }
+
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 800px) {
+
+      header {
+        padding: 16px 5%;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .ticket-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 560px;
+      }
+
+      .hero h1 {
+        font-size: 45px;
+      }
+    }
+
+
+    @media (max-width: 500px) {
+
+      .section {
+        padding: 50px 0;
+      }
+
+      .ticket-info,
+      .form-card {
+        padding: 25px 20px;
+      }
+
+      .category-options,
+      .date-options {
+        grid-template-columns: 1fr;
+      }
+
+      .event-info {
+        flex-direction: column;
+      }
+
+      .info-box {
+        width: 100%;
+      }
+
+      .ticket-detail {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- ================= HEADER ================= -->
+
+  <header>
+
+    <div class="logo">
+      SI JAWARA
+      <span>SABA KOTA</span>
+    </div>
+
+    <nav>
+      <a href="#home">Beranda</a>
+      <a href="#ticket">Ticketing</a>
+      <a href="#about">Tentang Acara</a>
+    </nav>
+
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <div class="hero-label">
+        🎟️ PENDAFTARAN PESERTA
+      </div>
+
+      <h1>
+        SI JAWARA<br>
+        <span>SABA KOTA</span>
+      </h1>
+
+      <p>
+        Mari hadir dan ikut memeriahkan kegiatan
+        SI JAWARA SABA KOTA di Bandung Creative Hub.
+      </p>
+
+      <div class="event-info">
+
+        <div class="info-box">
+          📅 <strong>1–2 September 2026</strong>
+        </div>
+
+        <div class="info-box">
+          📍 <strong>Bandung Creative Hub</strong>
+        </div>
+
+        <div class="info-box">
+          🎟️ <strong>Registrasi Peserta</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= TICKETING ================= -->
+
+  <section class="section" id="ticket">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>Registrasi Tiket</h2>
+
+        <p>
+          Silakan isi data peserta dengan lengkap
+        </p>
+
+      </div>
+
+
+      <div class="ticket-wrapper">
+
+
+        <!-- INFO -->
+
+        <div class="ticket-info">
+
+          <h3>Informasi Acara</h3>
+
+          <ul>
+
+            <li>
+              📌 <strong>Nama Acara</strong><br>
+              SI JAWARA SABA KOTA 
+            </li>
+
+            <li>
+              📅 <strong>Tanggal</strong><br>
+              1–2 September 2026 
+            </li>
+
+            <li>
+              📍 <strong>Lokasi</strong><br>
+              Bandung Creative Hub (BCH)  
+            </li>
+
+            <li>
+              🎫 <strong>Kategori Peserta</strong><br>
+              Umum atau Siswa 
+            </li>
+
+            <li>
+              📱 <strong>Registrasi</strong><br>
+              Wajib mengisi nama dan nomor 
+            
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <div class="form-card">
+
+          <h3>Data Peserta</h3>
+
+          <form id="ticketForm">
+
+            <!-- NAMA -->
+
+            <div class="form-group">
+
+              <label for="nama">
+                Nama Lengkap
+              </label>
+
+              <input
+                type="text"
+                id="nama"
+                placeholder="Masukkan nama lengkap"
+                required>
+
+            </div>
+
+
+            <!-- WHATSAPP -->
+
+            <div class="form-group">
+
+              <label for="whatsapp">
+                Nomor WhatsApp
+              </label>
+
+              <input
+                type="tel"
+                id="whatsapp"
+                placeholder="Contoh: 081234567890"
+                required>
+
+            </div>
+
+
+            <!-- KATEGORI -->
+
+            <div class="form-group">
+
+              <label>
+                Kategori Peserta
+              </label>
+
+              <div class="category-options">
+
+                <div class="category-option">
+
+                  <input
+                    type="radio"
+                    name="kategori"
+                    id="umum"
+                    value="UMUM"
+                    required>
+
+                  <label for="umum">
+                    👤<br>
+                    UMUM
+                  </label>
+
+                </div>
+
+
+                <div class="category-option">
+
+                  <input
+                    type="radio"
+                    name="kategori"
+                    id="siswa"
+                    value="SISWA">
+
+                  <label for="siswa">
+                    🎓<br>
+                    SISWA
+                  </label>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- TANGGAL -->
+
+            <div class="form-group">
+
+              <label>
+                Pilih Tanggal Kehadiran
+              </label>
+
+              <div class="date-options">
+
+                <div class="date-option">
+
+                  <input
+                    type="radio"
+                    name="tanggal"
+                    id="tanggal1"
+                    value="1 September 2026"
+                    required>
+
+                  <label for="tanggal1">
+                    📅<br>
+                    1 September
+                  </label>
+
+                </div>
+
+
+                <div class="date-option">
+
+                  <input
+                    type="radio"
+                    name="tanggal"
+                    id="tanggal2"
+                    value="2 September 2026">
+
+                  <label for="tanggal2">
+                    📅<br>
+                    2 September
+                  </label>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="submit-btn">
+
+              🎟️ DAFTAR SEKARANG
+
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================= SUCCESS ================= -->
+
+      <div
+        class="success"
+        id="successBox">
+
+        <div class="success-icon">
+          ✓
+        </div>
+
+        <h2>
+          Registrasi Berhasil!
+        </h2>
+
+        <p>
+          Data peserta berhasil dicatat.
+          Simpan nomor tiket Anda.
+        </p>
+
+
+        <div class="e-ticket">
+
+          <div class="ticket-header">
+
+            <div class="ticket-brand">
+              SI JAWARA<br>
+              SABA KOTA
+            </div>
+
+            <div
+              class="ticket-number"
+              id="ticketNumber">
+            </div>
+
+          </div>
+
+
+          <div class="ticket-detail">
+
+            <div class="detail-box">
+
+              <span>Nama</span>
+
+              <strong id="resultNama">
+              </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+              <span>Kategori</span>
+
+              <strong id="resultKategori">
+              </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+              <span>Tanggal</span>
+
+              <strong id="resultTanggal">
+              </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+              <span>Lokasi</span>
+
+              <strong>
+                Bandung Creative Hub
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= ABOUT ================= -->
+
+  <section class="section about" id="about">
+
+    <div class="container">
+
+      <h2>
+        SI JAWARA SABA KOTA
+      </h2>
+
+      <p>
+        “SI JAWARA SABA KOTA” merupakan ungkapan semangat siswa-siswi SMK Negeri 14 Bandung sebagai para jawara pemenang dan pejuang yang melangkah keluar dari lingkungan sekolah menuju kota dengan membawa karya, semangat, serta jati diri untuk dikenalkan dan dibagikan kepada masyarakat luas.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <div class="container">
+
+      <p>
+        © 2026 SI JAWARA SABA KOTA VOL2
+      </p>
+
+      <p style="margin-top:6px;">
+        Bandung Creative Hub
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    const form =
+      document.getElementById("ticketForm");
+
+    const successBox =
+      document.getElementById("successBox");
+
+
+    form.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+
+      // Ambil data
+
+      const nama =
+        document.getElementById("nama").value;
+
+      const whatsapp =
+        document.getElementById("whatsapp").value;
+
+      const kategori =
+        document.querySelector(
+          'input[name="kategori"]:checked'
+        ).value;
+
+      const tanggal =
+        document.querySelector(
+          'input[name="tanggal"]:checked'
+        ).value;
+
+
+      // Generate nomor tiket
+
+      const nomorTiket =
+        "SJ-" +
+        new Date().getFullYear() +
+        "-" +
+        Math.random()
+          .toString(36)
+          .substring(2,8)
+          .toUpperCase();
+
+
+      // Simpan data
+
+      const dataPeserta = {
+        nomorTiket: nomorTiket,
+        nama: nama,
+        whatsapp: whatsapp,
+        kategori: kategori,
+        tanggal: tanggaln
+      };
+
+u
+      localStorage.setItem(
+        "pesertaSiJawara",
+        JSON.stringify(dataPeserta)
+      );
+
+
+      // Tampilkan tiket
+
+      document.getElementById(
+        "ticketNumber"
+      ).innerText = nomorTiket;
+
+      document.getElementById(
+        "resultNama"
+      ).innerText = nama;
+
+      document.getElementById(
+        "resultKategori"
+      ).innerText = kategori;
+
+      document.getElementById(
+        "resultTanggal"
+      ).innerText = tanggal;
+
+
+      successBox.classList.add("show");
+
+      successBox.scrollIntoView({
+        behavior: "smooth"
+      });
+
+    });
+
+
+    // Cek data yang tersimpan
+
+    window.addEventListener("load", function() {
+
+      const data =
+        localStorage.getItem("pesertaSiJawara");
+
+      if (data) {
+
+        const peserta =
+          JSON.parse(data);
+
+        document.getElementById(
+          "ticketNumber"
+        ).innerText = peserta.nomorTiket;
+
+        document.getElementById(
+          "resultNama"
+        ).innerText = peserta.nama;
+
+        document.getElementById(
+          "resultKategori"
+        ).innerText = peserta.kategori;
+
+        document.getElementById(
+          "resultTanggal"
+        ).innerText = peserta.tanggal;
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
+```
