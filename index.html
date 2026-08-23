@@ -1050,10 +1050,10 @@ const supabaseClient = supabase.createClient(
   SUPABASE_ANON_KEY
 );
 
-const form = document.getElementById("ticketForm");
+const formSupabase = document.getElementById("ticketForm");
 
 
-form.addEventListener("submit", async function(event) {
+formSupabase.addEventListener("submit", async function(event) {
   event.preventDefault();
 
   const nama = document.getElementById("nama").value.trim();
