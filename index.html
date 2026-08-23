@@ -1052,13 +1052,82 @@ const supabaseClient = supabase.createClient(
 
 const form = document.getElementById("ticketForm");
 
-```html
-<form id="registrationForm">
-  <!-- input form kamu tetap di sini -->
-</form>
+
+form.addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const nama = document.getElementById("nama").value.trim();
+  const whatsapp = document.getElementById("whatsapp").value.trim();
+
+  const kategoriInput = document.querySelector(
+    'input[name="kategori"]:checked'
+  );
+
+  const tanggalInput = document.querySelector(
+    'input[name="tanggal"]:checked'
+  );
+
+  // Cek data
+  if (!nama || !whatsapp) {
+    alert("Nama dan nomor WhatsApp wajib diisi.");
+    return;
+  }
+
+  if (!kategoriInput) {
+    alert("Silakan pilih kategori peserta.");
+    return;
+  }
+
+  if (!tanggalInput) {
+    alert("Silakan pilih tanggal kehadiran.");
+    return;
+  }
+
+  const kategori = kategoriInput.value;
+  const tanggal = tanggalInput.value;
+
+  console.log("Data peserta:", {
+    nama,
+    whatsapp,
+    kategori,
+    tanggal
+  });
+
+  // Simpan ke Supabase
+  const { data, error } = await supabaseClient
+    .from("peserta")
+    .insert([
+      {
+        nama: nama,
+        whatsapp: whatsapp,
+        kategori: kategori,
+        tanggal: tanggal
+      }
+    ])
+    .select();
+
+  if (error) {
+    console.error("SUPABASE ERROR:", error);
+
+    alert(
+      "Pendaftaran gagal!\n\n" +
+      error.message
+    );
+
+    return;
+  }
+
+  console.log("Berhasil tersimpan:", data);
+
+  // Tampilkan hasil sukses
+  alert("Pendaftaran berhasil! Data peserta sudah tersimpan.");
+
+  form.reset();
+});
+```
+
 
 <script>
-const form = document.getElementById("registrationForm");
 
 form.addEventListener("submit", async function(event) {
   event.preventDefault();
