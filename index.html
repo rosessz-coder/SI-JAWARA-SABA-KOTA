@@ -970,7 +970,7 @@
         tanggal: tanggaln
       };
 
-u
+
       localStorage.setItem(
         "pesertaSiJawara",
         JSON.stringify(dataPeserta)
@@ -1038,7 +1038,57 @@ u
     });
 
   </script>
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+const SUPABASE_URL = "https://mmkrhlighbwmabfwmttk.supabase.co/rest/v1/";
+const SUPABASE_ANON_KEY = "sb_publishable_eDEhXiLnccNDxqCkD0p4Mg_Z6vi9tfF";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+const form = document.getElementById("ticketForm");
+
+form.addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const nama = document.getElementById("nama").value;
+  const whatsapp = document.getElementById("whatsapp").value;
+
+  const kategori = document.querySelector(
+    'input[name="kategori"]:checked'
+  ).value;
+
+  const tanggal = document.querySelector(
+    'input[name="tanggal"]:checked'
+  ).value;
+
+  const { data, error } = await supabaseClient
+    .from("peserta")
+    .insert([
+      {
+        nama: nama,
+        whatsapp: whatsapp,
+        kategori: kategori,
+        tanggal: tanggal
+      }
+    ])
+    .select();
+
+  if (error) {
+    console.error(error);
+    alert("Pendaftaran gagal: " + error.message);
+    return;
+  }
+
+  alert("Pendaftaran berhasil! Data sudah tersimpan.");
+
+  form.reset();
+});
+</script>
 </body>
 </html>
 ```
